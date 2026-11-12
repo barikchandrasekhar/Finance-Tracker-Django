@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md {% if form.errors %}shake{% endif %}">
+    <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Sign Up</h2>
+    {% if form.errors %}
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 transform hover:scale-105 flex items-center justify-center">
+            Sign Up
+            <span class="spinner"></span>
+        </button>
+    </form>
+</div>
+{% endblock %}

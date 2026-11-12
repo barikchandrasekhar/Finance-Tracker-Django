@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md animate-fade-in {% if form.errors %}shake{% endif %}">
+    <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Upload Financial Details</h2>
+    {% if form.errors %}
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <ul class="list-disc list-inside">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="income" class="block text-gray-700">Income</label>
+            <input type="number" step="0.01" id="income" name="income" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <div>
+            <label for="expenses" class="block text-gray-700">Expenses</label>
+            <input type="number" step="0.01" id="expenses" name="expenses" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <div>
+            <label for="savings" class="block text-gray-700">Savings</label>
+            <input type="number" step="0.01" id="savings" name="savings" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <div>
+            <label for="debts" class="block text-gray-700">Debts</label>
+            <input type="number" step="0.01" id="debts" name="debts" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 transform hover:scale-105 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.998 7.998a1 1 0 01-1.414 0L3.293 10.707a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Submit
+            <span class="spinner"></span>
+        </button>
+    </form>
+</div>
+{% endblock %}

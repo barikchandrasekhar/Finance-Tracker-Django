@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md animate-fade-in {% if error %}shake{% endif %}">
+    <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Login</h2>
+    {% if error %}
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">{{ error }}</div>
+    {% endif %}
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="username" class="block text-gray-700">Username</label>
+            <input type="text" id="username" name="username" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <div>
+            <label for="password" class="block text-gray-700">Password</label>
+            <input type="password" id="password" name="password" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 transform hover:scale-105 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 4.5A1.5 1.5 0 014.5 3h11a1.5 1.5 0 011.5 1.5v11a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 15.5v-11zM10 7a.75.75 0 00-1.5 0v3.25c0 .414.336.75.75.75H11a.75.75 0 000-1.5h-1V7z" clip-rule="evenodd" />
+            </svg>
+            Login
+            <span class="spinner"></span>
+        </button>
+    </form>
+</div>
+{% endblock %}
